@@ -10,7 +10,7 @@ const app = express();
 
 // CORS ko poora allow karein debugging ke liye
 app.use(cors({
-    origin: "*", 
+    origin: "origin:http://localhost:3000", 
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true
 }));
