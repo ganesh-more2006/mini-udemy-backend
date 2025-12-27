@@ -8,8 +8,8 @@ exports.enrollInCourse = async (req, res) => {
 
         const alreadyEnrolled = await Enrollment.findOne({ student: studentId, course: courseId });
         if (alreadyEnrolled) {
-            return res.status(400).json({ message: "Aap pehle hi enroll hain!" });
-        }
+    return res.status(400).json({ message: "You are already enrolled in this course!" });
+}
 
         const enrollment = new Enrollment({ student: studentId, course: courseId });
         await enrollment.save();
