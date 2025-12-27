@@ -7,13 +7,12 @@ require('dotenv').config({ path: path.join(__dirname, '../.env') });
 
 const app = express();
 
+// Updated CORS to allow all origins temporarily for testing
 app.use(cors({
-  origin: [
-    "http://localhost:3000", 
-    "https://mini-udemy-app-2025.netlify.app" 
-  ],
+  origin: true, // "true" automatically reflects the request origin
   credentials: true
 }));
+
 app.use(express.json());
 
 // Routes
