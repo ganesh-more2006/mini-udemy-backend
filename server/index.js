@@ -1,20 +1,29 @@
-require('dotenv').config({ path: './backend/.env' }); 
 const express = require('express');
 const cors = require('cors');
-const connectDB = require('./backend/server/db');
-const authRoutes = require('./backend/routes/authRoutes'); 
+const connectDB = require('./db');
+const path = require('path');
+
+require('dotenv').config({ path: path.join(__dirname, '../.env') }); 
 
 const app = express();
 
-// Middleware
+// ✅ CORS: Live server ke liye '*' allow kiya gaya hai
+app.use(cors({
+    origin: "*", 
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true
+}));
+
 app.use(express.json());
-app.use(cors());
 
 // Routes
-app.use('/api/auth', authRoutes);
+app.use('/api/auth', require('../routes/authRoutes'));
+app.use('/api/courses', require('../routes/courseRoutes'));
+app.use('/api/enrollments', require('../routes/enrollmentRoutes'));
 
-// Database Connect
+// Database Connection
 connectDB();
 
+// ✅ Railway ke liye Port Fix
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, '0.0.0.0', () => console.log(`🚀 Server running on port ${PORT}`));

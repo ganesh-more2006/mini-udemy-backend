@@ -1,14 +1,10 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
-  "license": "ISC",
-  "author": "ganesh",
-  "type": "commonjs",
-  "main": "index.js",
+  "main": "server/server.js", 
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server/server.js"
+    "start": "node server/server.js",
+    "dev": "nodemon server/server.js"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
