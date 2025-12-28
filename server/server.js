@@ -9,7 +9,8 @@ const app = express();
 
 // Updated CORS to allow all origins temporarily for testing
 app.use(cors({
-  origin: true, // "true" automatically reflects the request origin
+  origin: ["https://mini-udemy-app-2025.netlify.app", "http://localhost:3000"],
+  methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
 
