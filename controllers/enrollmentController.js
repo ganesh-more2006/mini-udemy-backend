@@ -3,7 +3,7 @@ const Enrollment = require('../models/Enrollment');
 // ✅ 1. Enroll with Payment Logic
 exports.enrollInCourse = async (req, res) => {
     try {
-        const { courseId, paymentMethod } = req.body; // paymentMethod frontend se aayega
+        const { courseId, paymentMethod } = req.body;
         const studentId = req.user._id;
 
         // Check if already enrolled
@@ -12,12 +12,11 @@ exports.enrollInCourse = async (req, res) => {
             return res.status(400).json({ message: "You are already enrolled in this course!" });
         }
 
-        // Agar payment PhonePe/UPI hai, toh hum status 'pending' rakhenge (Real integration ke liye)
-        // Abhi ke liye hum ise 'completed' kar rahe hain taaki aap test kar sakein
+     
         const enrollment = new Enrollment({ 
             student: studentId, 
             course: courseId,
-            paymentStatus: 'completed', // Real API mein ye 'pending' hoga jab tak PhonePe signal na de
+            paymentStatus: 'completed', 
             paymentId: `PAY-${Date.now()}` // Dummy Payment ID
         });
 
@@ -35,7 +34,7 @@ exports.enrollInCourse = async (req, res) => {
 exports.getUserEnrollments = async (req, res) => {
     try {
         const studentId = req.user._id;
-        // Sirf wahi enrollments dikhao jinka payment 'completed' hai
+       
         const enrollments = await Enrollment.find({ 
             student: studentId, 
             paymentStatus: 'completed' 

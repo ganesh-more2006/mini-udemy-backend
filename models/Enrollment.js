@@ -11,18 +11,18 @@ const enrollmentSchema = new mongoose.Schema({
         ref: 'Course', 
         required: true 
     },
-    // ✅ Naya Field: Payment kis status par hai (pending/completed/failed)
+  
     paymentStatus: {
         type: String,
         enum: ['pending', 'completed', 'failed'],
         default: 'pending'
     },
-    // ✅ Naya Field: Konsa method use kiya (PhonePe/GPay/UPI)
+ 
     paymentMethod: {
         type: String,
         default: 'UPI'
     },
-    // ✅ Naya Field: Transaction ID track karne ke liye
+   
     paymentId: {
         type: String
     },

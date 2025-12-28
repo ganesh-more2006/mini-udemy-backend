@@ -81,8 +81,8 @@ exports.forgotPassword = async (req, res) => {
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: process.env.EMAIL_USER, // ✅ `.env` se email uthayega
-                pass: process.env.EMAIL_PASS  // ✅ `.env` se App Password uthayega
+                user: process.env.EMAIL_USER, 
+                pass: process.env.EMAIL_PASS  
             }
         });
 
@@ -90,10 +90,10 @@ exports.forgotPassword = async (req, res) => {
             from: '"Mini Udemy" <support@miniudemy.com>',
             to: email,
             subject: 'Password Reset OTP',
-            text: `Aapka Password Reset OTP hai: ${otp}. Ye 10 minute ke liye valid hai.`
+            text: `Your password reset OTP is: ${OTP}. This is valid for 10 minutes.`
         });
 
-        res.status(200).json({ message: "OTP email par bhej diya gaya hai" });
+        res.status(200).json({ message: "The OTP has been sent to your email." });
     } catch (error) {
         console.error("Forgot Pass Error:", error);
         res.status(500).json({ error: error.message });
@@ -116,7 +116,6 @@ exports.resetPassword = async (req, res) => {
             return res.status(400).json({ message: "Invalid OTP ya Expired!" });
         }
 
-        // Set new password (pre-save hook will hash it automatically)
         user.password = newPassword;
         
         // Clear OTP fields
