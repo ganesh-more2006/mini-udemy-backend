@@ -3,15 +3,16 @@ const cors = require('cors');
 const connectDB = require('./db');
 const path = require('path');
 
+// Env file path check
 require('dotenv').config({ path: path.join(__dirname, '../.env') });
 
 const app = express();
 
-// Updated CORS to allow all origins temporarily for testing
+// ✅ CORS Fix: origin '*' karne se mobile aur laptop dono par payment/login errors nahi aayenge
 app.use(cors({
-  origin: ["https://mini-udemy-app-2025.netlify.app", "http://localhost:3000"],
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true
+    origin: "*", 
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true
 }));
 
 app.use(express.json());
@@ -25,4 +26,6 @@ app.use('/api/enrollments', require('../routes/enrollmentRoutes'));
 connectDB();
 
 const PORT = process.env.PORT || 5000;
+
+
 app.listen(PORT, '0.0.0.0', () => console.log(`🚀 Server running on port ${PORT}`));
